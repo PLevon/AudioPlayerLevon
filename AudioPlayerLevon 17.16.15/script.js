@@ -1,25 +1,25 @@
-let  data = {
-    title : ["Sun_Goes_Down",
-            "Smoke",
-            "Summer-walk"],
-    song : ["Music/Marenberg_Kollektiv_Sun_Goes_Down.mp3",
-            "Music/smoke-143172.mp3",
-            "Music/summer-walk-152722.mp3"],
-    poster : ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDdNxNIowwLu4Vt1b504aMddPTjzOpQni8neX0l-mM1w&s", 
-             "https://img.freepik.com/premium-photo/pink-smoke-from-smoke-bomb-nature_159701-5312.jpg",
-             "https://w0.peakpx.com/wallpaper/271/998/HD-wallpaper-sky-reflections-lakes-grass-colors-nature-beautiful-twilight-clouds-tall.jpg"],
+let data = {
+    title: ["Sun_Goes_Down",
+        "Smoke",
+        "Summer-walk"],
+    song: ["Music/Marenberg_Kollektiv_Sun_Goes_Down.mp3",
+        "Music/smoke-143172.mp3",
+        "Music/summer-walk-152722.mp3"],
+    poster: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDdNxNIowwLu4Vt1b504aMddPTjzOpQni8neX0l-mM1w&s",
+        "https://img.freepik.com/premium-photo/pink-smoke-from-smoke-bomb-nature_159701-5312.jpg",
+        "https://w0.peakpx.com/wallpaper/271/998/HD-wallpaper-sky-reflections-lakes-grass-colors-nature-beautiful-twilight-clouds-tall.jpg"],
 }
 
 
 let song = new Audio()
 
-window.onload = function(){
+window.onload = function () {
     playSong()
 }
 
 
 let currentSong = 0
-function playSong(){
+function playSong() {
     song.src = data.song[currentSong]
     let songTitle = document.getElementById("songTitle")
     songTitle.textContent = data.title[currentSong]
@@ -31,39 +31,39 @@ function playSong(){
 
 
 
-function playOrPause(){
+function playOrPause() {
     let play = document.getElementById("play")
 
-    if(song.paused){
+    if (song.paused) {
         song.play()
         play.src = "images/pause.png"
     }
-    else{
+    else {
         song.pause()
         play.src = "images/play-button-arrowhead.png"
     }
 }
 
 
-song.addEventListener("timeupdate", function(){
+song.addEventListener("timeupdate", function () {
     // console.log(song.currentTime);
     // console.log(song.duration);
 
     let fill = document.getElementsByClassName("fill")
-    let position  = song.currentTime / song.duration
+    let position = song.currentTime / song.duration
 
     fill[0].style.marginLeft = position * 100 + "%"
 
     convertTime(song.currentTime)
 
-    if(song.ended){
+    if (song.ended) {
         next()
     }
 
 })
 
 
-function convertTime(seconds){
+function convertTime(seconds) {
     currentTime = document.getElementsByClassName("currentTime")
 
     let min = Math.floor(seconds / 60)
@@ -80,7 +80,7 @@ function convertTime(seconds){
 }
 
 
-function totalTime(seconds){
+function totalTime(seconds) {
     let min = Math.round(seconds / 60)
     let sec = Math.round(seconds % 60)
 
@@ -92,27 +92,50 @@ function totalTime(seconds){
 
 }
 
-function next(){
+function next() {
     currentSong++
 
-    if(currentSong >= data.song.length){
+    if (currentSong >= data.song.length) {
         currentSong = 0
-    } 
+    }
 
     playSong()
-    play.src = "images/play-button-arrowhead.png"
+    song.play()
+    play.src = "images/pause.png"
 }
 
-function prev(){
+function prev() {
     currentSong--
 
-    if(currentSong < 0){
+    if (currentSong < 0) {
         currentSong = data.song.length - 1
     }
 
     playSong()
-    play.src = "images/play-button-arrowhead.png"
-    
-    
+    song.play()
+    play.src = "images/pause.png"
+
+
 }
 
+
+function muted() {
+    var mute = document.getElementById("mute")
+    if (song.muted) {
+        mute.src = "images/volume.png" //mute
+        song.muted = false
+    } else {
+        mute.src = "images/volume-mute.png"
+        song.muted = true
+        //unmute
+    }
+}
+
+
+function increase() {
+    song.volume += 0.2;
+}
+
+function decrease() {
+    song.volume -= 0.2;
+}    
