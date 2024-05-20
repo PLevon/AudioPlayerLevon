@@ -19,6 +19,24 @@ window.onload = function () {
 
 
 let currentSong = 0
+
+const seekbar = document.getElementById('seek-bar');
+seekbar.addEventListener("click", function (event) {
+    const rect = seekbar.getBoundingClientRect();
+    const offsetX = event.clientX - rect.left;
+    const width = rect.width;
+    const clickPositionRatio = offsetX / width;
+    song.currentTime = clickPositionRatio * song.duration;
+    updateSeekBar(); 
+});
+
+document.addEventListener("keydown", function (event) {
+    if (event.code === "Space") {
+        event.preventDefault(); 
+        playOrPause();
+    }
+});
+
 function playSong() {
     song.src = data.song[currentSong]
     let songTitle = document.getElementById("songTitle")
@@ -28,6 +46,7 @@ function playSong() {
     let main = document.getElementsByClassName("main")
     main[0].style.backgroundImage = "url(" + data.poster[currentSong] + ")"
 }
+
 
 
 
@@ -139,3 +158,23 @@ function increase() {
 function decrease() {
     song.volume -= 0.2;
 }    
+
+
+// const repeatBtn = main.querySelector("#repeat-plist");
+// repeatBtn.addEventListener("click", function(){
+//     let getText = repeatBtn.innerText;
+//     switch(getText){
+//         case "repeat":
+//             repeatBtn.innerText = "repeat_one"
+//             repeatBtn.setAttribute("title", "Song looped")
+//             break
+//         case "repeat-one":
+//             repeatBtn.innerText = "shuffle"
+//             repeatBtn.setAttribute("title", "Playback shuffle")
+//             break
+//         case "shuffle":
+//             repeatBtn.setAttribute("title", "Playlist looped")
+//             repeatBtn.innerText = "repeat"
+//             break        
+//     }
+// })

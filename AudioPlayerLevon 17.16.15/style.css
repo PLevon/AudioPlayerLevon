@@ -95,6 +95,9 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    cursor: pointer;
+
 }
 
 .handle{
@@ -158,4 +161,18 @@ body{
     justify-content: flex-end;
     margin-right: 10px;
     align-items: center;
+}
+
+
+#songTitle{
+    animation: run 6s linear infinite;
+}
+
+@keyframes run {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
