@@ -160,21 +160,3 @@ function decrease() {
 }    
 
 
-// const repeatBtn = main.querySelector("#repeat-plist");
-// repeatBtn.addEventListener("click", function(){
-//     let getText = repeatBtn.innerText;
-//     switch(getText){
-//         case "repeat":
-//             repeatBtn.innerText = "repeat_one"
-//             repeatBtn.setAttribute("title", "Song looped")
-//             break
-//         case "repeat-one":
-//             repeatBtn.innerText = "shuffle"
-//             repeatBtn.setAttribute("title", "Playback shuffle")
-//             break
-//         case "shuffle":
-//             repeatBtn.setAttribute("title", "Playlist looped")
-//             repeatBtn.innerText = "repeat"
-//             break        
-//     }
-// })
